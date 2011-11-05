@@ -36,7 +36,7 @@
 			
 			curConfig = {
 				canvas_expansion: 3,
-				dimensions: [640,480],
+				dimensions: [1024,768],
 				initFill: {
 					color: 'FF0000',  // solid red
 					opacity: 1
@@ -703,7 +703,7 @@
 					multiselected: multiselected
 				});
 			};
-		
+
 			// Call when part of element is in process of changing, generally
 			// on mousemove actions like rotate, move, etc.
 			var elementTransition = function(window,elems) {
@@ -3966,7 +3966,7 @@
 				} else if(this.value == 'content') {
 					wh.val('fit').attr("disabled","disabled");
 				} else {
-					var dims = this.value.split('x');
+					var dims = this.value.split(" ", 2)[0].split('x');
 					$('#canvas_width').val(dims[0]);
 					$('#canvas_height').val(dims[1]);
 					wh.removeAttr("disabled");

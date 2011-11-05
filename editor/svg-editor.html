@@ -42,6 +42,7 @@
 <!--{endif}-->
 
 <!-- you can load extensions here -->
+<script type="text/javascript" src="extensions/ext-foreignobject.js"></script>
 <script type="text/javascript" src="extensions/ext-ddp-source.js"></script>
 
 <!-- always minified scripts -->
@@ -642,11 +643,17 @@
 				<label>
 					<select id="resolution">
 						<option id="selectedPredefined" selected="selected">Select predefined:</option>
-						<option>640x480</option>
-						<option>800x600</option>
-						<option>1024x768</option>
-						<option>1280x960</option>
-						<option>1600x1200</option>
+						<option>480x320 iPhone</option>
+                        <option>960x640 iPhone4+</option>
+						<option>1024x768 iPad</option>
+						<option>800x480 Android phone</option>
+						<option>480x320 Android phone</option>
+						<option>1280x720 Galaxy Nexus</option>
+						<option>960x540 HTC Sensation</option>
+						<option>854x480 Ericsson phone</option>
+						<option>1280x800 Android tablet</option>
+						<option>1024x600 Android tablet</option>
+						<option>800x600 Android tablet</option>
 						<option id="fitToContent" value="content">Fit to Content</option>
 					</select>
 				</label>

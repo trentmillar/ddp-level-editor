@@ -21,7 +21,7 @@
 		var svgCanvas;
 		var Editor = {};
 		var is_ready = false;
-		
+
 		var defaultPrefs = {
 			lang:'en',
 			iconsize:'m',
@@ -104,6 +104,8 @@
 		
 		var customHandlers = {};
 		
+        Editor.editingsource = false;
+
 		Editor.curConfig = curConfig;
 		
 		Editor.tool_scale = 1;
@@ -592,7 +594,7 @@
 			var textBeingEntered = false;
 			var selectedElement = null;
 			var multiselected = false;
-			var editingsource = false;
+			var editingsource = Editor.editingsource = false;
 			var docprops = false;
 			var preferences = false;
 			var cur_context = '';
@@ -2719,8 +2721,8 @@
 			}
 		
 			var showSourceEditor = function(e, forSaving){
-				if (editingsource) return;
-				editingsource = true;
+				if (editingsource || Editor.editingsource) return;
+				editingsource = Editor.editingsource = true;
 				
 				$('#save_output_btns').toggle(!!forSaving);
 				$('#tool_source_back').toggle(!forSaving);
@@ -2794,7 +2796,7 @@
 			};
 			
 			var saveSourceEditor = function(){
-				if (!editingsource) return;
+				if (!editingsource && !Editor.editingsource) return;
 		
 				var saveChanges = function() {
 					svgCanvas.clearSelection();
@@ -3184,14 +3186,14 @@
 		
 			var cancelOverlays = function() {
 				$('#dialog_box').hide();
-				if (!editingsource && !docprops && !preferences) {
+				if (!editingsource && !docprops && !preferences && !Editor.editingsource) {
 					if(cur_context) {
 						svgCanvas.leaveContext();
 					}
 					return;
 				};
 		
-				if (editingsource) {
+				if (editingsource || Editor.editingsource) {
 					if (orig_source !== $('#svg_source_textarea').val()) {
 						$.confirm(uiStrings.notification.QignoreSourceChanges, function(ok) {
 							if(ok) hideSourceEditor();
@@ -3210,7 +3212,7 @@
 		
 			var hideSourceEditor = function(){
 				$('#svg_source_editor').hide();
-				editingsource = false;
+				Editor.editingsource = editingsource = false;
 				$('#svg_source_textarea').blur();
 			};
 			
@@ -3266,7 +3268,7 @@
 			}
 			
 			$(window).resize(function(evt) {
-				if (editingsource) {
+				if (editingsource || Editor.editingsource) {
 					properlySourceSizeTextArea();
 				}
 				

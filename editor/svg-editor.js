@@ -2808,6 +2808,7 @@
 				}
 		
 				if (!svgCanvas.setSvgString($('#svg_source_textarea').val())) {
+
 					$.confirm(uiStrings.notification.QerrorsRevertToSource, function(ok) {
 						if(!ok) return false;
 						saveChanges();

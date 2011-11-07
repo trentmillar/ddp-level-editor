@@ -535,7 +535,7 @@ var cur_text = all_properties.text,
 	lastClickPoint = null,
 	
 	// Map of deleted reference elements
-	removedElements = {}
+	removedElements = {};
 
 // Clipboard for cut, copy&pasted elements
 canvas.clipBoard = [];
@@ -554,7 +554,7 @@ var runExtensions = this.runExtensions = function(action, vars, returnArray) {
 		}
 	});
 	return result;
-}
+};
 
 // Function: addExtension
 // Add an extension to the editor
@@ -762,7 +762,7 @@ getStrokedBBox = this.getStrokedBBox = function(elems) {
 			offset += sw/2;
 		}
 		return offset;
-	}
+	};
 	var bboxes = [];
 	$.each(elems, function(i, elem) {
 		var cur_bb = getCheckedBBox(elem);
@@ -790,7 +790,7 @@ getStrokedBBox = this.getStrokedBBox = function(elems) {
 	full_bb.width = max_x - min_x;
 	full_bb.height = max_y - min_y;
 	return full_bb;
-}
+};
 
 // Function: getVisibleElements
 // Get all elements that have a BBox (excludes <defs>, <title>, etc).
@@ -851,7 +851,7 @@ var groupSvgElem = this.groupSvgElem = function(elem) {
 	var g = document.createElementNS(svgns, "g");
 	elem.parentNode.replaceChild(g, elem);
 	$(g).append(elem).data('gsvg', elem)[0].id = getNextId();
-}
+};
 
 // Function: copyElem
 // Create a clone of an element, updating its ID and its children's IDs when needed
@@ -1104,7 +1104,7 @@ var remapElement = this.remapElement = function(selected,changes,m) {
 		finishUp = function() {
 			if(doSnapping) for(var o in changes) changes[o] = snapToGrid(changes[o]);
 			assignAttributes(selected, changes, 1000, true);
-		}
+		};
 		box = svgedit.utilities.getBBox(selected);
 	
 	for(var i = 0; i < 2; i++) {
@@ -1382,7 +1382,7 @@ var updateClipPath = function(attr, tx, ty) {
 	
 	// Update clipPath's dimensions
 	recalculateDimensions(path);
-}
+};
 
 // Function: recalculateDimensions
 // Decides the course of action based on the element's transform list
@@ -5674,7 +5674,15 @@ var convertToGroup = this.convertToGroup = function(elem) {
 		
 		// recalculate dimensions on the top-level children so that unnecessary transforms
 		// are removed
-		svgedit.utilities.walkTreePost(g, function(n){try{recalculateDimensions(n)}catch(e){console.log(e)}});
+		svgedit.utilities.walkTreePost(g, function(n)
+        {
+            try {
+                recalculateDimensions(n)
+            }
+            catch(e){
+                console.log(e)
+            }
+        });
 		
 		// Give ID for any visible element missing one
 		$(g).find(visElems).each(function() {
@@ -5709,7 +5717,7 @@ this.setSvgString = function(xmlString) {
 		// convert string into XML document
 		var newDoc = svgedit.utilities.text2xml(xmlString);
 
-		this.prepareSvg(newDoc);
+			this.prepareSvg(newDoc);
 
 		var batchCmd = new BatchCommand("Change Source");
 
@@ -5784,7 +5792,13 @@ this.setSvgString = function(xmlString) {
 		
 		// recalculate dimensions on the top-level children so that unnecessary transforms
 		// are removed
-		svgedit.utilities.walkTreePost(svgcontent, function(n){try{recalculateDimensions(n)}catch(e){console.log(e)}});
+		svgedit.utilities.walkTreePost(svgcontent, function(n){
+            try{
+                recalculateDimensions(n)
+            }catch(e){
+                console.log(e)
+            }
+        });
 		
 		var attrs = {
 			id: 'svgcontent',

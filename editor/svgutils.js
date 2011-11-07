@@ -207,12 +207,13 @@ svgedit.utilities.text2xml = function(sXML) {
 		dXML.async = false;
 	} catch(e){ 
 		throw new Error("XML Parser could not be instantiated"); 
-	};
+	}
 	try{
 		if(dXML.loadXML) out = (dXML.loadXML(sXML))?dXML:false;
 		else out = dXML.parseFromString(sXML, "text/xml");
 	}
-	catch(e){ throw new Error("Error parsing XML string"); };
+	catch(e){ throw new Error("Error parsing XML string"); }
+
 	return out;
 };
 

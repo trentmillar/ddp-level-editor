@@ -20,6 +20,7 @@ svgEditor.addExtension("shapes", function() {
 	
 	// This populates the category list
 	var categories = {
+        ddp: 'Doodle Draw Physics',
 		basic: 'Basic',
 		object: 'Objects',
 		symbol: 'Symbols',
